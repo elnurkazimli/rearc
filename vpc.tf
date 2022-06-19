@@ -10,8 +10,9 @@ module "vpc" {
 
   enable_nat_gateway = true
   enable_vpn_gateway = true
-  enable_int_gateway = true
-  external_nat_ip_ids = "${aws_eip.nat.*.id}"
+  create_igw = true
+  enable_classiclink_dns_support = true
+  default_security_group_ingress = []
 }
 
 
