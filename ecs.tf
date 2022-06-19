@@ -22,7 +22,7 @@ module "ecs-fargate" {
   version = "~> 6.1.0"
 
   name_prefix        = "ecs-fargate-rearc"
-  vpc_id             = "rearc"
+  vpc_id             = ""
   private_subnet_ids = ["10.0.1.0/24", "10.0.2.0/24"]
 
   cluster_id         = aws_ecs_cluster.rearc.id
