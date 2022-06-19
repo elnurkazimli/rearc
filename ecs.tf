@@ -1,5 +1,5 @@
-resource "aws_ecs_cluster" "cluster" {
-  name = "example-ecs-cluster"
+resource "aws_ecs_cluster" "rearc" {
+  name = "rearc"
 
   setting {
     name  = "containerInsights"
@@ -7,8 +7,8 @@ resource "aws_ecs_cluster" "cluster" {
   }
 }
 
-resource "aws_ecs_cluster_capacity_providers" "cluster" {
-  cluster_name = aws_ecs_cluster.cluster.name
+resource "aws_ecs_cluster_capacity_providers" "rearc" {
+  cluster_name = aws_ecs_cluster.rearc.name
 
   capacity_providers = ["FARGATE_SPOT", "FARGATE"]
 
@@ -21,13 +21,13 @@ module "ecs-fargate" {
   source = "umotif-public/ecs-fargate/aws"
   version = "~> 6.1.0"
 
-  name_prefix        = "ecs-fargate-example"
+  name_prefix        = "ecs-fargate-rearc"
   vpc_id             = "rearc"
   private_subnet_ids = ["10.0.1.0/24", "10.0.2.0/24"]
 
-  cluster_id         = aws_ecs_cluster.cluster.id
+  cluster_id         = aws_ecs_cluster.rearc.id
 
-  task_container_image   = "marcincuber/2048-game:latest"
+  task_container_image   = "node:10"
   task_definition_cpu    = 256
   task_definition_memory = 512
 
@@ -36,7 +36,7 @@ module "ecs-fargate" {
 
   target_groups = [
     {
-      target_group_name = "tg-fargate-example"
+      target_group_name = "tg-fargate-rearc"
       container_port    = 80
     }
   ]
