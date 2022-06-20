@@ -2,8 +2,8 @@ version: '3'
 
 services:
   webserver:
-    image: alpine
+    image: node:10
     command: env
     environment:
-      - DB_USER
-      - DB_PASSWORD
+      - USER
+      - PASSWORD
